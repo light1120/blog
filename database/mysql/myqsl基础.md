@@ -15,6 +15,10 @@ use xxxx;
 select database(); 
 // 查看所有表
 show tables;
+// 创建table
+create table table_test(id INT,name VARCHAR(50));
+// 插入数据
+insert into table_test values (1001,'test_name');
 // 查看表的行总数
 select count(*) from table;
 // 按f_xxx倒序查询10个
