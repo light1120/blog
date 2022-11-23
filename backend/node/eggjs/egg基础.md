@@ -120,9 +120,27 @@ egg-project
     |- config.unittest.js
     `- config.local.js
     ```
+    ```
+    export default (appInfo)=>{
+        const config = {}
+        //config.xxx = {}
+        //config.yyy = {}
+        return config 
+    }
+    ```
     - 在固定文件中配置各个环境的配置项
     - 写法：`exports.key = value`
     - 读取：`app.config.key`
+    - 内置appInfo：字段如下
+
+    |appInfo属性|说明|
+    |-----|-----|
+    |pkg|package.json|
+    |name|package.json name|
+    |baseDir|应用代码目录|
+    |HOME|/home/xxx|
+    |root|应用根目录，只有在 local 和 unittest 环境下为 baseDir，其他都为 HOME。|
+
 - 使用插件  
     ```
     // 安装插件
