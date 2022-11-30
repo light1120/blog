@@ -140,7 +140,7 @@ exports.httpclient = {
 
 ### 多进程 & IPC
 * 多进程
-    * 底层： [cluster模块](https://nodejs.org/api/cluster.html)，可参考`/backend/node/module/cluster.md`
+    * 底层： [cluster模块](https://nodejs.org/api/cluster.html)，可参考[node cluster模块](../module/cluster.md)
     * agent机制：由master fork，以“worker秘书”的身份，不处理业务，专门处理一些公共事务，减少worker资源消耗，让worker专注业务。时序图：
     ```
         +---------+           +---------+          +---------+
