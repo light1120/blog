@@ -71,7 +71,7 @@ module.exports = {
   },
 };
 ```
-egg-onerror主要是在[koa-onerror](https://github.com/koajs/onerror/blob/master/index.js)的基础上做了一些扩展。koa-onerror主要是重写了`app.context.onerror`方法。那么框架在调用`ctx.onerror`就时调用koa-onerror的方法。eggjs是基于koajs的，主要是koajs在调用`ctx.onerror`，主要是2个地方
+egg-onerror主要是在[koa-onerror](https://github.com/koajs/onerror/blob/master/index.js)的基础上做了一些扩展。koa-onerror主要是重写了`app.context.onerror`方法。eggjs是基于koajs的，koajs调用`ctx.onerror`方法主要在2个地方
 * [application的handleRequest方法](https://github.com/koajs/koa/blob/master/lib/application.js#L154)
 ```
  handleRequest (ctx, fnMiddleware) {

@@ -1,5 +1,5 @@
 ## agent 是做什么用的？
-### agent 模式
+### 1，agent 模式
 ```
 +--------+          +-------+
                   | Master |<-------->| Agent |
@@ -15,7 +15,7 @@
 ```
 * agent设计思想是用来给worker减负的，做一些非业务类型的脏活累活
 
-### agent能做什么？
+### 2，agent能做什么？
 * 既然是非业务的脏活，累活，所以最好是封装成某个插件
 * agent 例子
     * [egg-schedule](https://github.com/eggjs/egg-schedule/blob/master/agent.js):做 job 调度
