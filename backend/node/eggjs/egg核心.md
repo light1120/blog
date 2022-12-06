@@ -1,13 +1,13 @@
-## eggjs 核心
+# eggjs 核心
 
-### 本地开发
+## 本地开发
 主要用到[egg-bin](https://github.com/eggjs/egg-bin)
 * dev：`npm run dev` 执行的 `egg-bin dev`，一般会加上`--node-options--max-old-space-size=4096`来扩展nodejs运行时内存限制
 * [调试](https://www.eggjs.org/zh-CN/core/development#%E4%BD%BF%E7%94%A8-egg-bin-%E8%B0%83%E8%AF%95)
     * 开启DEBUG模块：`DEBUG=* npm run dev`开启所有的模块 `DEBUG=egg* npm run dev`开启egg打头的模块。很多模块在开发中会使用[debug](https://www.npmjs.com/package/debug)打印一些调试信息。例如egg-bin中`const debug = require('debug')('egg-bin'); `。开启了DEBUG选项，在运行中就会打印模块中`debug(xxx)`中的信息
     * debug： `npm run debug`执行的`egg-bin debug` 。配合chrome DevTools 的chrome://inspect进行断点调试。
 
-### 应用部署
+## 应用部署
 * 构建：一般需要 设置环境变量、设置nodejs编译时内存、执行tsc(ts项目需要)、`npm install --production`、拷贝项目到实际目录
 * 启动：
 主要用到[egg-scripts](https://github.com/eggjs/egg-scripts)，
@@ -36,7 +36,7 @@
     * start : `"start": "egg-scripts start --daemon --title=my-nodejs-proj",`
     * stop : `"stop": "egg-scripts stop --title=my-nodejs-proj",`
     
-### 日志 [egg-logger](https://github.com/eggjs/egg-logger)
+## 日志 [egg-logger](https://github.com/eggjs/egg-logger)
 * 日志路径
     * 默认 : 放在`${appInfo.root}/logs/${appInfo.name}`
     * 配置 : 修改配置文件logger.dir
@@ -59,7 +59,7 @@
     * logger.consoleLevel='DEBUG': 终端默认只打印INFO以上日志，也可以设置consoleLevel为'DEBUG'，'NONE'
     * logger.disableConsoleAfterReady='false': 生产环境开启console日志，不建议
 
-### [HttpClient](https://github.com/eggjs/egg/blob/master/lib/core/httpclient.js)
+## [HttpClient](https://github.com/eggjs/egg/blob/master/lib/core/httpclient.js)
 * 使用 : `ctx.httpclient.request(url, options)`和`ctx.curl(url, options)`等价的。 app下也有同样的方法
 * 配置 : 默认如下
 ```
@@ -110,7 +110,7 @@ exports.httpclient = {
         * `beforeRequest: Function(options)`：发送前钩子
         * `timing: Boolean`：开启之后，result.res.timing 拿到这次 HTTP 请求各阶段的时间测量值，如waiting dns queuing等
 
-### Cookie & Session
+## Cookie & Session
 * Cookie
     * 用法：`ctx.cookies.get(key, options)`，`ctx.cookies.set(key, value, options)`
     * 存储：http协议头cookie，页面可以通过`document.cookie`访问
@@ -138,7 +138,7 @@ exports.httpclient = {
     * 存储：默认同cookie一致，可以在app.js通过`app.sessionStore`将session存储在制度位置，一般是database,redis
     * [egg-session-redis](https://github.com/eggjs/egg-session-redis): 就是扩展了[app.js](https://github.com/eggjs/egg-session-redis/blob/master/app.js)将session存储在redis
 
-### 多进程 & IPC
+## 多进程 & IPC
 * 多进程
     * 底层： [cluster模块](https://nodejs.org/api/cluster.html)，可参考[node cluster模块](../module/cluster.md)
     * agent机制：由master fork，以“worker秘书”的身份，不处理业务，专门处理一些公共事务，减少worker资源消耗，让worker专注业务。时序图：
@@ -180,7 +180,7 @@ exports.httpclient = {
     * `agent.messenger.sendRandom(action, data)`: agent随机发给app，app不能调用
     * `app.messenger.sendTo(pid, action, data)`: 发给指定进程
 
-### 异常处理
+## 异常处理
 * [onerror](https://github.com/eggjs/egg-onerror/blob/master/app.js): 主要是监听了app的error事件`app.on('error',...)`，如果有配置，会覆盖默认处理
     * errorPageUrl: String / Function 页面路径，html类型重定向这里
     * accepts: Function 识别用户请求，接受json或者html
@@ -190,7 +190,7 @@ exports.httpclient = {
     * json: Function 
     * jsonp: Function 不需处理，会调用json
 
-### 安全
+## 安全
     * XSS：主要是针对用户输入，输出进行转义
         * `helper.escape()`：字符串转义
         * `helper.sjs()`：js变量中字符转义

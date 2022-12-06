@@ -1,13 +1,13 @@
-## eggjs
+# eggjs 基础
 
-### eggjs简介
+## eggjs简介
 - [官方文档](https://www.eggjs.org/zh-CN/basics)
 - eggjs是在[koajs](https://koajs.com/#introduction)的基础上进行了功能增强
 - 微内核+插件机制，每个单一功能都由单一插件来完成，达到模块解藕的效果
 - 奉行**约定由于配置** ，就是固定的目录，文件做固定的事情，减少团队沟通成本
 - [渐进式开发](https://www.eggjs.org/zh-CN/intro/progressive)，系统演进过程中，抽离通用部分形成插件，多个插件组成framework。业务系统只需引入framework，然后专注业务即可
 
-### 基础功能
+## 基础功能
 框架规范约定：
 ```
 egg-project
@@ -70,7 +70,7 @@ egg-project
 - `app/model/**` 用于放置领域模型，可选，由领域类相关插件约定，如 [egg-sequelize](https://github.com/eggjs/egg-sequelize)。
 
 
-### 如何上手？
+## 如何上手？
 [官方如何教程](https://www.eggjs.org/zh-CN/intro/quickstart)
 
 可以从一次http请求开始`http://127.0.0.1:7001/user`，这里先去头去尾（去掉页面渲染部分，去掉数据持久层）
@@ -111,7 +111,7 @@ egg-project
         - 做某些计算
         - 发送http请求其他服务，返回结果
 
-### 丰富业务
+## 丰富业务
 - 创建配置项
     ```
     config
