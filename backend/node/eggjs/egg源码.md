@@ -37,4 +37,4 @@ const Application = require(options.framework).Application;
 我从egg-cluster中看到，agent进程和worker进程都是实例化了framework中导出的[Agent](https://github.com/eggjs/egg/blob/master/lib/agent.js#L15)，[Application](https://github.com/eggjs/egg/blob/master/lib/application.js#L52)类。 而他们都继承了[EggApplication](https://github.com/eggjs/egg/blob/master/lib/egg.js#L35)，`EggApplication`又继承了`EggCore`。我们先看看`EggCore`做了哪些？回过来再看看他们在继承了`EggCore`基类之后做了哪些
 
 ## egg-core
-egg应用最终都是继承了`EggCore`，具体看看[egg-core]('./module/egg-core.md')怎样定义的
+egg应用最终都是继承了`EggCore`，具体看看[egg-core](./module/egg-core.md)怎样定义的
