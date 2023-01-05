@@ -14,6 +14,7 @@
 * `find /data test.conf`   		//查找文件
 * `scp xx/xx test@111.111.111.111:/xxx/xxx` 传输文件 
 * `scp -v -r xx/xx test@111.111.111.111:/xxx/xxx` 传输目录
+* `scp -r -P 36000 ./xxx root@xx.xx.xx.xx:/data/xxx/` 传输目录
 *  sz 、rz 	上传和下载文件命令 
 * ln [参数][源文件或目录][目标文件或目录]
  创建硬连接：以副本的形式存在
@@ -29,3 +30,4 @@
 * free
 * top
 * cat /proc/cpuinfo| grep "processor"   //     查看cpu个数
+* alias 别名
