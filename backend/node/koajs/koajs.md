@@ -8,7 +8,10 @@
 * 中间件思想：核心，[将所有的中间件链式调用，依次处理请求，之后交给响应处理](https://github.com/koajs/koa/blob/master/lib/application.js#L135-L161)
 ```
  callback () {
+    //app.use(fn)就是把fn放到middleware数组中
     const fn = this.compose(this.middleware)
+    //compose就是把middleware数组中的函数链式调用组成新的fn
+    //新的fn调用时会链式执行middleware中所有函数
     if (!this.listenerCount('error')) this.on('error', this.onerror)
     const handleRequest = (req, res) => {
       const ctx = this.createContext(req, res)
