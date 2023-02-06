@@ -30,6 +30,7 @@
 总结：V8  <--->  Libuv （libuv 中有 queue, thread pool ） V8向Queue中丢任务，thread从Queue中取任务，结果给V8
 
 ## 4, 总结
+- [官网](https://nodejs.org)，[中文网](http://nodejs.cn)
 - nodejs是一个javascript运行时环境
 - nodejs运行在一个单个进程中
 - nodejs是单线程的，所有请求都由一个线程来处理
