@@ -29,3 +29,15 @@
 
 总结：V8  <--->  Libuv （libuv 中有 queue, thread pool ） V8向Queue中丢任务，thread从Queue中取任务，结果给V8
 
+## 4, 总结
+- nodejs是一个javascript运行时环境
+- nodejs运行在一个单个进程中
+- nodejs是单线程的，所有请求都由一个线程来处理
+- nodejs使用的非阻塞机制，来处理大量请求。
+- nodejs并不是全部单线程，只是单个线程处理javascript， I/O部分是多线程的，libuv默认4进程
+- nodejs为什么是单线程，因为javascript是单线程，再因为javascript设计初是运行在浏览器，操作DOM的，只能是单线程
+- nodejs单线程如何处理高并发的？
+    - 因为非阻塞机制，异步调用
+    - 单线程依次处理每个请求，nodejs耗时高的操作、I/O操作全部异步化。
+    - V8可以快速处理一个请求，清空调用栈，开始处理下一个请求
+
