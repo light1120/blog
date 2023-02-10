@@ -14,7 +14,7 @@
 
 - V8：chrome V8 引擎，用来执行 js 代码
 - libuv：C 编写的事件驱动的非阻塞异步 I/O，提供了 fs, DNS, Network, Child process, Piple, Stream 等操作。 是 Event Loop 的重要组成部分。主要包含 事件循环，队列，线程池等
-<div align="center"><img src='./images/libuv.png' width=600 alt=''> </img></div>
+<div align="center"><img src='../images/libuv.png' width=600 alt=''> </img></div>
 
 - llhttp: TS+C 编写的轻量 http 解析库
 - c-ares: 处理异步 DNS
@@ -23,7 +23,7 @@
 
 ## 3，Nodejs 是怎么运行的？（Event Loop）
 
-<div align="center"><img src='./images/nodejs-EventLoop.png' width=600 alt=''> </img></div>
+<div align="center"><img src='../images/eventLoop.png' width=600 alt=''> </img></div>
 
 - 1、V8 解析 js 代码，并执行
 - 2、调用 Node Api 执行具体操作
