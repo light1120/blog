@@ -20,8 +20,30 @@
   创建硬连接：以副本的形式存在
   创建软连接： ln -s 以快捷方式存在
 - tail -f test.log 动态查看文件，一般用于查看日志
-- `chgrp 用户组 文件名 -R` -R 表示递归目录下所有文件
+-
 - `chown 用户名 文件名 -R` 用户组 用户名 可以用 ll 查看，用户组在前
+
+### 修改文件属性
+
+```
+#ll test.conf
+-rw-r--r-- 1 root root 643 Feb 21 23:33 test.conf
+```
+
+- `chmod` : 修改文件可读可写可执行属性
+  - chmod 777 test : 赋予 777 属性
+  - chmod +x test : 添加 x 属性
+  - chmod -x test : 去掉 x 属性
+- `chown` : 修改文件所属
+  - `chown 用户名 文件名 -R` -R 递归修改目录下文件的所属
+- `chgrp` : 修改文件所属组
+  - `chgrp 用户组 文件名 -R` -R 表示递归目录下所有文件
+
+查看目录占用磁盘空间
+
+- `du -sh` : 当前目录所以文件总大小
+- `du -ah` : 列举所以文件大小
+- `du -ah | sort -h` : 按照大小从小到大排序 `| head` : 前 10 个 `| tail `: 后 10 个
 
 ### other
 
