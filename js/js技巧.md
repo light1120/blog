@@ -30,16 +30,69 @@ function where() {
 
 ### 4、函数重载
 
+> 根据参数数量不同创建不同的执行逻辑
+
 ```
-function addMethod(object, name, fn) {
-    var old = object[name];
-    object[name] = function(){
-        if (fn.length == arguments.length)
-           return fn.apply(this, arguments)
-        else if (typeof old == 'function')
-           return old.apply(this, arguments);
-    };
+function overLoadSingle(object, name, fn) {
+  var old = object[name];
+  object[name] = function(){
+    if (fn.length == arguments.length)
+      return fn.apply(this, arguments)
+    else if (typeof old == 'function')
+      return old.apply(this, arguments);
+  };
 }
+
+function overloadMulti(obj, name) {
+  const Fnlist = [];
+  Fnlist[0] = obj[name];
+  Fnlist[obj[name].length] = obj[name];
+  return function (fn) {
+    const oldFn = Fnlist[fn.length];
+    if (!!oldFn) {
+      throw new Error(`function with ${fn.length} arguments already exist`);
+    } else {
+      Fnlist[fn.length] = fn;
+    }
+    obj[name] = function () {
+      const fn = Fnlist[arguments.length] || Fnlist[0];
+      return fn.apply(obj, arguments);
+    };
+  };
+}
+
+const loadObj = {
+  num: 1,
+  addNum: function () {
+    console.log(`fun0: ${this.num + 0}`) ;
+  },
+};
+const fn1 = function (num1) {
+    console.log(`fun1: ${this.num + num1}`) ;
+};
+const fn2 = function (num1, num2) {
+    console.log(`fun2: ${this.num + num1 + num2}`) ;
+};
+const fn3 = function (num1, num2, num3) {
+    console.log(`fun3: ${this.num + num1 + num2 + num3}`) ;
+};
+
+// 重载一个函数
+// overLoadSingle(loadObj, "addNum",fn1)
+// loadObj.addNum()
+// loadObj.addNum(1)
+// loadObj.addNum(1,2)
+
+// 重载多个函数
+// const overloadAddNum= overloadMulti(loadObj, "addNum");
+// overloadAddNum(fn1)
+// overloadAddNum(fn2)
+// overloadAddNum(fn3)
+// loadObj.addNum()
+// loadObj.addNum(1)
+// loadObj.addNum(1,2)
+// loadObj.addNum(1,2,3)
+// loadObj.addNum(1,2,3,4)
 ```
 
 ### 5、简单的字符串加密解密算法
