@@ -28,3 +28,24 @@ me.hello()
 
 - seal: 将一个对象固定，不可新增属性，不可删除属性，可以访问和修改属性
 - freeze: 将一个对象禁锢，只能访问属性，不可修改属性，不可新增，删除属性
+
+## 3、Object.entries
+
+将对象键值对转换成数组
+
+```
+Object.entries({
+  a: 1,
+  b: 2,
+})
+//[['a',1],['b',2]]
+```
+
+## 4、Object.fromEntries
+
+与 Object.entries 相反，将数组转换成对象
+
+```
+Object.entries([['a',1],['b',2]])
+//{a: 1, b: 2}
+```
