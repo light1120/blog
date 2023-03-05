@@ -236,6 +236,7 @@ http {
     ```
 
 - 5.2.4 server 配置
+
   - 基础配置
     ```
     listen 8080;
@@ -255,7 +256,83 @@ http {
     expires    24h;
     # 设置过期
     ```
-  - location
+  - location 匹配规则
+
+    > 正则匹配时，可以用到正则的分组 用`$n`来取值第 n 个分组
+
+    | 修饰符 | 匹配规则             | 优先级 |
+    | ------ | -------------------- | ------ |
+    | =      | 精确匹配             | 高     |
+    | ^~     | 前缀匹配             | 中     |
+    | ~      | 正则匹配             | 次     |
+    | ~\*    | 正则匹配不区分大小写 | 次     |
+    | 空     | 普通匹配             | 低     |
+
+    - `root /xxx`: 可以用于多个模块，指定文件路径，真实路径：`/xxx/location`
+    - `alias /xxx`: 只用于 location 模块，指定文件路径，真实路径 `/xxx`
+    - `rewrite regex replacement [flag]`: 重定向，`rewrite ^/node/(.*) /$1 break;`将 uri 中的 node 去掉
+      flag：
+      - break：本条 rewrite 逻辑运行完成以后，后续的 rewrite 不再匹配
+      - last：本条 rewrite 逻辑运行完成以后，后续的 rewrite 不再匹配，重新开始 location 路由匹配
+      - permanent：永久重定向，301
+      - redirect：临时重定向，302
+
+  - **proxy_pass**:
+    - 反向代理: `proxy_pass http://localhost:8000/uri/` 需要明确协议、域名或者 ip、端口、uri
+    - 负载均衡: `proxy_pass http://upstream_name;` 需要加上 http 协议，指定到创建好的 upstream 模块
+
+- 5.2.5 upstream 负载均衡
+  - 基本配置
+    ```
+    upstream test {
+      server 127.0.0.1:7001;
+      server 127.0.0.2:7001;
+    }
+    ```
+  - 负载均衡策略
+    - **轮询**: 就是基本配置，默认配置
+    - **加权(weight)**
+      ```
+      upstream test {
+        server 127.0.0.1:7001 weight=1;
+        server 127.0.0.2:7001 weigh
+      }
+      ```
+    - **least_conn**: 最小连接数
+      会将请求分配到 active_connections / weight 最小服务器；active_connections 可以配置 [stub_statues](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html#stub_status)查看
+      ```
+      upstream test {
+        least_conn;
+        server 127.0.0.1:7001 weight=1;
+        server 127.0.0.2:7001 weight=2;
+      }
+      ```
+    - **hash**: hash 算法: 将 ip,uri,argv 某个值进行 hash 算法，相同的 hash 值交给的固定的服务器；如果是对客户端 ip 进行 hash，可以选择`ip_hash`指令
+      ```
+      upstream test {
+        hash $request_uri;
+        #ip_hash
+        server 127.0.0.1:7001;
+        server 127.0.0.2:7001;
+      }
+      ```
+    - **一致性 hash**:consistent_hash，是第三方模块，使用方法跟 hash 一样
+      `consistent_hash $request_uri;`
+      在系统运行中，如果集群剔除节点，新增节点会导致大量的请求分发到不同的节点,consistent_hash 就是为了解决这个问题
+    - **fair**: 响应时间短的服务优先分配请求
+      ```
+      upstream test {
+        fair
+        server 127.0.0.1:7001;
+        server 127.0.0.2:7001;
+      }
+      ```
+  - server 配置
+    - weight=1: 权重，默认 1，权重大分配到请求多
+    - down : 下线，不会分配到请求
+    - max_fails=1: 最大失败次数，超过之后，后面请求不会分配
+    - fail_timeout=10s : 超过 max_fail 之后，会停止 fail_timeout 时间，后会再次分配
+    - max_conns=1000: 最大同时处理的请求数
 
 ### 5.3、变量
 
