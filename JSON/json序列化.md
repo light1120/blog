@@ -8,7 +8,8 @@
 
 ### 2、JSON 序列化 & 反序列化
 
-- `JSON.stringify` : 序列化
+- `JSON.stringify` : 序列化 `JSON.stringify(value[, replacer [, space]])`
+
   ```
   const me = {
     name: 'light',
@@ -17,6 +18,35 @@
   JSON.stringify(me);
   // '{"name":"light","gender":"male"}'
   ```
+
+  - 格式化:
+
+  ```
+  console.log(JSON.stringify(me,null,'\t'))
+  //{
+  //  "name": "light",
+  //  "gender": "male"
+  //}
+  ```
+
+  - 处理特殊对象，如 **Map**、**Set**
+
+    如果直接执行 JSON.stringify 会返回'{}'，需要添加第二个参数，
+
+    - 数组：过滤掉其他原属，只保留数组内的元素
+    - 函数：将所有值经过函数处理后返回：下面是将 map 转换成对象，set 转换成数组
+      ```
+      const jsonReplacer = (_, value) => {
+        if (value instanceof Set) {
+          return [...value]
+        }
+        if (value instanceof Map) {
+          return Object.fromEntries(value)
+        }
+        return value
+      }
+      ```
+
 - `JSON.parse` : 反序列化
   ```
   JSON.parse('{"name":"light","gender":"male"}')
