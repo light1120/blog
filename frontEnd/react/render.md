@@ -6,10 +6,10 @@
 
 - 通过 props 可以将数据从上至下流入 parents -> props -> child
 
-## 2、render: 组件什么时候回渲染
+## 2、render: 组件什么时候会渲染
 
 - 首次加载；加载完了之后，**修改 props 并不会触发 render**
-- 主动调用 render()
+- 父组件主动调用子组件 render()： 父组件条件渲染子组件
 - 引用了 state，state 发生变化时
 
 ## 3、[添加反向数据流](https://zh-hans.reactjs.org/docs/thinking-in-react.html#step-5-add-inverse-data-flow)
