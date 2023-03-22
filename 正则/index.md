@@ -102,10 +102,12 @@ var reg new RegExp('\\bis\\b','g')
 - (?<=pattern) ：非获取匹配，反向肯定预查，与正向肯定预查类似，只是方向相反。例如，“(?<=95|98|NT|2000)Windows”能匹配“2000Windows”中的“Windows”，但不能匹配“3.1Windows”中的“Windows”。“(?<=95|98|NT|2000)Windows”目前在 python3.6 中 re 模块测试会报错，用“|”连接的字符串长度必须一样，这里“95|98|NT”的长度都是 2，“2000”的长度是 4，会报错。
 - (?<!pattern) ：非获取匹配，反向否定预查，与正向否定预查类似，只是方向相反。例如“(?<!95|98|NT|2000)Windows”能匹配“3.1Windows”中的“Windows”，但不能匹配“2000Windows”中的“Windows”。这个地方不正确，有问题，此处用或任意一项都不能超过 2 位，如“(?<!95|98|NT|20)Windows 正确，“(?<!95|980|NT|20)Windows 报错，若是单独使用则无限制，如(?<!2000)Windows 正确匹配。同上，这里在 python3.6 中 re 模块中字符串长度要一致，并不是一定为 2，比如“(?<!1995|1998|NTNT|2000)Windows”也是可以的。
 
-## 12、前瞻
+## 12、前瞻 （\*重要）
 
-a(?=b) ---> 匹配后面紧跟着 b 的 a，如果有，则得到的结果是 a
-a(?!b) ---> 匹配后面没有紧跟着 b 的 a，如果有，则得到的记过是 a
+- a(?=b): ---> 匹配后面紧跟着 b 的 a，如果有，则得到的结果是 a
+- a(?!b): ---> 匹配后面没有紧跟着 b 的 a，如果有，则得到的记过是 a
+- (?=b)a: ---> 匹配前面紧跟着 b 的 a，如果有，则得到的结果是 a
+- (?!b)a: ---> 匹配前面没有紧跟着 b 的 a，如果有，则得到的记过是 a
 
 # 13、RegExp 对象方法
 
@@ -122,22 +124,28 @@ a(?!b) ---> 匹配后面没有紧跟着 b 的 a，如果有，则得到的记过
 
 - search ：检索与正则表达式相匹配的值，返回匹配检索到索引，-1 表示没有检索到
 - match ：找到一个或多个正则表达式的匹配，返回数组，内容包括检索内容，索引值，输入值等
+- matchAll ：找到一个或多个正则表达式的匹配，返回数组，内容包括检索内容，索引值，输入值等，正则表达式需要带上`g`
 - replace ：替换与正则表达式匹配的串，返回新的字符串，内容为替换后结果
 - split ：把字符串分割为字符串数组，返回新的数组，内容为分割后结果
 
   Search：返回第一个匹配结果，有返回 index，没有查找到返回-1。不执行全局查找。对参数会强转正则对象
   Match : 全局调用（带 g），会返回匹配结果的数组，不会执行子表达式（分组）。非全局调用和 exec 返回一样。
 
-  ```
-  String.prototype.replace( str , destStr );
-  String.prototype.replace( reg , destStr );
-  String.prototype.replace( reg , function );
-  'a1b2c3d4e5'.replace( /\d/g , function( match , index , origin ){
+```
+String.prototype.replace( str , destStr );
+String.prototype.replace( reg , destStr );
+String.prototype.replace( reg , function );
+'a1b2c3d4e5'.replace( /\d/g , function( match , index , origin ){
   console.log(index);
   return parseInt(match)+3;
-  } )
-  'a1b2c3d4e5'.replace( /(\d)(\w)(\d)/g , function( match , group1 , group2 , group3 , index , origin ){
+})
+'a1b2c3d4e5'.replace( /(\d)(\w)(\d)/g , function( match , group1 , group2 , group3 , index , origin ){
   console.log(match);
   return group1 + group3;
-  } )
-  ```
+})
+```
+
+## 工具
+
+- https://regex101.com/: 非常棒很推荐
+- https://regexper.com/: 图形化正则表达式
