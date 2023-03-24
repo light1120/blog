@@ -52,3 +52,19 @@ type Recursive<K extends string | number | symbol, T> = {
     [P in K]: Recursive<K, T> | T
 }
 ```
+
+### 6、SetAny<Type,Keys>
+
+将一个 interface 中指定的属性设置成 any 类型
+
+```
+type SetAny<T, U> = {
+  [k in keyof T]: k extends U ? any : T[k];
+};
+interface  Test {
+  a: string
+  b: number
+  c: string
+}
+type Test1 = SetAny<Test,'a'|'b'>
+```
