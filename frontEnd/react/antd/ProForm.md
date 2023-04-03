@@ -46,13 +46,65 @@
 
 ## Form 设计
 
-- 1、将 Prop 的数据，定义普通变量，
-- 2、组合数据赋值 Form 的 `initialValues` 属性，Form 会根据单项 Form.Item 的 name 属性对应的字段首次渲染
-- 3、提交时 `onFinish`中会收到所有 表单项 name 组成的对象。基础的 Form 就完成了
-- 4、如果 Prop 数据变化，如何更新 Form ?
-- 5、创建`ProFormInstance`赋值 `formRef` 属性
-- 6、useEffect 监听 prop 变化，重新组装数据，调用 `formRef.current?.setFieldsValue` 更新表单项
-- 7、子 Form 问题？ 或者 Form 中子组件？
-- 8、新建普通组件，由多个 FormItem 组件组成，同属于一个 Form，公用一个校验体系
-- 9、监听子组件 onChange，在父组件中 setFieldsValue ，或者 把 formRef 传入子组件，在子组件中 setFieldsValue
-- 10、提交时`onFinish`也可以得到子组件中的数据
+1-初始化：
+
+- 0、创建 `ProFormInstance` 赋值 `Form` `formRef` 属性
+- 1、将 `prop` 中的数据，按照 `Form` 的格式，初始化对象 `formData`
+- 2、注意 `formData` 中包含所有的 `formItem` 的数据，属性名对应 `Form.Item` 的 `name` 属性
+- 3、将 `formData` 赋值给 `Form` 的 `initialValues` 属性，完成初始化。
+
+2-更新属性：
+
+- 4、输入，选择等操作。不用任何处理，按照 `Form` 内部运行
+- 5、由于用户选择，导致表单项发生变化。也不用任何处理
+- 6、由于 `prop` 变化，被动更新表单。 执行初始化流程，将 `prop` 数据，生成 `formData` 。然后 `formRef.current?.setFieldsValue` 更新表单项。
+  ```
+  useMemo(() => {
+    if (props.info) formRef.current?.setFieldsValue(formDataFormat(props.info));
+  }, [props.info]);
+  ```
+
+3-获取表单数据：
+
+- 7、提交表单：`onFinish` 会返回所有表单项数据组成的表单对象，需要将对象转换成前后台交互数据格式
+- 8、非提交获取表单：`formRef.current?.getFieldsValue()` ，获取单个或者全部
+- 9、表单联动：修改某个表单项，导致整个表单项发生变化。比如：选择了某个值，出现了其他的必选表单项
+
+  ```
+  <ProForm.Item shouldUpdate noStyle>
+    {(form) =>
+      form.getFieldValue(`xxxType`) === 1 && (
+        <ProFormSelect ...></ProFormSelect>
+      )
+    }
+  </ProForm.Item>
+  ```
+
+4-动态表单： 输入表单过程中，新增/删除表单项
+
+- 10、初始化中构建数组，通过数组渲染多个表单项
+  ```
+  itemArray?.map((itemId) => (
+    <ProFormSelect
+      name={`type_${itemId}`}
+      ....
+    ></ProFormSelect>
+  ))}
+  ```
+- 11、提交表单时，需要将所有的动态表单组合成
+  ```
+  itemArray((itemId) => {
+      return {
+          itemId,
+          type: formData[`type_${itemId}`],
+      }
+  }))
+  ```
+- 12、新增和删除，就是对数组 `itemArray` 操作
+
+5-子组件表单：
+
+- 13、子组件表单，就是多个 `Form.Item` 的集合，不要 `Form` 嵌套 `Form` , 只有父组件一个 `Form`
+- 14、在 `submit` 可以连着 子组件一起校验
+- 15、初始化时，可以包括自组件的表单项，也可以在 渲染时 `formRef.current?.getFieldsValue()`，初始化表单项
+- 16、提交表单时，`onFinish` 也包含了自组件的表单项
