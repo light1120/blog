@@ -46,6 +46,6 @@ Object.entries({
 与 Object.entries 相反，将数组转换成对象
 
 ```
-Object.entries([['a',1],['b',2]])
+Object.fromEntries([['a',1],['b',2]])
 //{a: 1, b: 2}
 ```
