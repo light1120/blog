@@ -31,9 +31,22 @@ if ($invalid_referer) {
 
 > [ssi](http://nginx.org/en/docs/http/ngx_http_ssi_module.html)(server side include): 可以理解为简易的服务端渲染
 
+相关配置:
+
+```
+ssi on;
+ssi_silent_errors on;
+ssi_types text/html;
+ssi_value_length 256;
+ssi_min_file_chunk 1k;
+ssi_last_modified off;
+```
+
 SSI 格式：`<!--# command parameter1=value1 parameter2=value2 ... -->` command 如下
 
 - echo : 输出变量的值
+  - var: 变量名
+  - default: 默认值
 
 ```
 window.serverTimeStr = '<!--#echo var="DATE_GMT" -->';
@@ -43,13 +56,15 @@ window.client_ip = '<!--#echo var="remote_addr" -->';
 ```
 
 - include: 包含一个请求的响应数据，可以请求文件内容，可以请求接口内容
-  - stub ：在加载过程中出现异常，如果 404 等，页面中会出现 2 个 body，一个是 404 页面。这时需要使用 `stub` 来填充，可以是一个未定义的值，这样页面中的 404 就显示空白
-  - wait：
-  - set：
+  - file : 文件名
+  - virtual : 声明一个请求
+  - stub : 在加载过程中出现异常，如果 404 等，页面中会出现 2 个 body，一个是 404 页面。这时需要使用 `stub` 来填充，可以使用 block 命令创建的一个空白模块，这样页面中的 404 就显示空白
+  - wait : 是否同步，等待请求返回结果才继续 SSI 进程
+  - set : 将请求的响应数据赋值给某个变量
 
 ```
 <!--#include file="/inc/test.html"-->
-<!--#include virtual="/inc/test.html" stub="file_not_foundxxx"  -->
+<!--#include virtual="/inc/test.html" stub="file_not_found"  -->
 ```
 
 - block: 定义 stub , 给 include 的 stub 使用
@@ -60,7 +75,9 @@ stub
 <!--# endblock -->
 ```
 
-- config :
+- config : 配置
+  - errmsg : 配置 SSI 过程出现错误时的 报错信息
+  - timefmt : 时间格式
 - set: 设置变量的值
 
 ```
@@ -70,4 +87,18 @@ stub
 </script>
 ```
 
-## 3、
+- if : 条件渲染
+
+```
+<!--# if expr="$name = text" -->
+...
+<!--# elif expr="..." -->
+...
+<!--# else -->
+...
+<!--# endif -->
+```
+
+## 3、操作 Hearder , Cookie
+
+-
