@@ -21,6 +21,7 @@
   创建软连接： ln -s 以快捷方式存在
 - tail -f test.log 动态查看文件，一般用于查看日志
 - grep 'content_filters' access.log > content.txt : 搜索文件中的内容，保存到文件
+- ps aux | grep "run serve" | grep -v grep | awk '{print $2}' | xargs kill -9 : 将筛选出来的进程全部kill掉
 - `chown 用户名 文件名 -R` 用户组 用户名 可以用 ll 查看，用户组在前
 
 - `ls -l`: 列出目录下的文件和目录，第一列的字符表示文件或目录的类型和权限。其中**第一个字符**表示文件类型，例如：
