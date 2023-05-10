@@ -84,3 +84,4 @@ $ chmod 777 test.sh
 - systemctl reload nginx : 重新加载服务配置文件
 - systemctl show nginx : 查看服务底层参数
 - systemctl daemon-reload : 重新加载所有修改的配置文件
+- systemctl reset-failed : 重置失败次数，默认一个服务 10 秒内最多可以重启 5 次，超过会报错，需要`reset-failed`重置
