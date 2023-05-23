@@ -125,7 +125,7 @@ networks:
       "com.docker.network.bridge.name": "docker0"
 ```
 
-这里使用了宿主机的 docker0 网卡作为驱动。
+这里使用了宿主机的 docker0 网卡作为驱动。让 Docker Compose 使用宿主机上的默认桥接网络，而不是为每个项目创建一个新的网络。这样可以避免与宿主机上其他网络的冲突。但是会降低容器之间的隔离
 
 ```
 docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container_id>
