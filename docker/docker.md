@@ -88,6 +88,8 @@ docker 是一种轻量级的容器化技术，可以将应用程序和其依赖�
     - --name : 设置别名
   - docker exec : 进入容器 `docker exec -it webserver bash`
   - docker stop : 终止容器 `docker stop $(docker ps -q)` 批量终止所有的容器
+  - docker inspect : 获取元数据
+    - `docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container_id>` : 查看 docker 容器内部 ip
   - docker kill : 终止容器 , 跟`docker stop` 一样 ; `ps -a `可以看到
   - docker top : 显示了容器内所有进程在宿主机上的 PID
   - docker start : 启动存在的容器
