@@ -1,10 +1,12 @@
-### 进程相关
+### 进程，端口相关
 
 - `pwd` 查看当前目录
 - `pwdx + 进程号` 查看进程运行地址
 - `lsof -i:9876` 查看 9876 端口号进程
 - `ps aux | grep xxx` 查看 xxx 进程
 - `kill -9 123456` 杀掉进程号 123456
+- `netstat -tunlp | grep 8000` 查看端口监听信息
+- `ps aux | grep "run serve" | grep -v grep | awk '{print $2}' | xargs kill -9` : 将筛选出来的进程全部 kill 掉
 
 ### 文件,目录相关
 
@@ -21,8 +23,7 @@
   创建软连接： ln -s 以快捷方式存在
   ** 源文件地址必须是绝对路径 **，不然在执行时，找不到源文件
 - tail -f test.log 动态查看文件，一般用于查看日志
-- grep 'content_filters' access.log > content.txt : 搜索文件中的内容，保存到文件
-- ps aux | grep "run serve" | grep -v grep | awk '{print $2}' | xargs kill -9 : 将筛选出来的进程全部 kill 掉
+- grep 'content_filters' access.log > content.txt : 搜索文件中的内容，保存到文
 - `chown 用户名 文件名 -R` 用户组 用户名 可以用 ll 查看，用户组在前
 
 - `ls -l`: 列出目录下的文件和目录，第一列的字符表示文件或目录的类型和权限。其中**第一个字符**表示文件类型，例如：
@@ -35,8 +36,6 @@
   - p 表示管道文件`
   - 可以通过 grep 过滤文件类型；`ls -l | grep "^-"` 过滤普通文件；加上` ｜wc -l` 统计文件数量
 - `ls -lR`: 递归列出目录下的文件和目录
-
-### 修改文件属性
 
 ```
 #ll test.conf
