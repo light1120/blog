@@ -7,6 +7,7 @@
 - `kill -9 123456` 杀掉进程号 123456
 - `netstat -tunlp | grep 8000` 查看端口监听信息
 - `ps aux | grep "run serve" | grep -v grep | awk '{print $2}' | xargs kill -9` : 将筛选出来的进程全部 kill 掉
+- `lsof -i:3000 | awk 'NR>1{print $2}' | xargs kill -9` : 删除端口占有的进程
 
 ### 文件,目录相关
 
@@ -56,6 +57,7 @@
 - `du -sh` : 当前目录所以文件总大小
 - `du -ah` : 列举所以文件大小
 - `du -ah | sort -h` : 按照大小从小到大排序 `| head` : 前 10 个 `| tail `: 后 10 个
+- `du -h --max-depth=1` : 当前目录下所有的目录或者文件的大小
 
 ### other
 
