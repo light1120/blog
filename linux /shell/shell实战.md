@@ -22,6 +22,8 @@ killpp() {
 }
 ```
 
+可以将`killpp`函数拷贝到`~/.bashrc` 或 `~/.bash_profile` 文件中，并使用 `source ~/.bashrc` 或 `source ~/.bash_profile`。就可以直接执行 `killpp 8000` 杀死占用端口 8000 的进程。
+
 ## 定义函数实现杀死 ps 中包含特定字符出的所有进程
 
 ```
@@ -45,3 +47,5 @@ killsp() {
   done
 }
 ```
+
+可以将`killsp`函数拷贝到`~/.bashrc` 或 `~/.bash_profile` 文件中，并使用 `source ~/.bashrc` 或 `source ~/.bash_profile`。就可以直接执行 `killsp yarn` 杀死所有跟 `yarn` 相关的进程。
