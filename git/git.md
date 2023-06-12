@@ -157,3 +157,5 @@ git diff commit1 commit1 --src/.. //比较某个目录或文件 2 次提交
 
 - 修改 commit 内容 :
   - `git commit --amend -m [message]` : 使用这次提交来替代上次提交
+- git init 之后添加全程仓库地址，然后 push 代码
+  - `git remote add origin git@git.xxx.com:xxxxx/xxxx.git`
