@@ -37,3 +37,7 @@ document.body.appendChild(myImage);
 ## 继承
 
 HTMLImageElement 继承于 HTMLElement。 也拥有了 HTMLElement 的一些事件 如 `load` , `drag` 等
+
+## 扩展
+
+其他非浏览器平台，也会实现 Image Api ， 如 小程序 ，weex 等
