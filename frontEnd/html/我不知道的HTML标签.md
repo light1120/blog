@@ -63,3 +63,26 @@
 文案，空格，换行等会照样显示
 
 ## <map>
+
+## table 相关
+
+> 表格相关的有 table thead tbody tr td th
+
+```
+<table>
+  <thead>
+    <tr></tr>
+  </thead>
+  <tbody>
+    <tr></tr>
+  </tbody>
+</table>
+```
+
+- 表格基本结构如上。表格 table 分 表格头 thead ,表格主体 tbody 。
+- thead ,tbody 其实没什么区别，就是名字不一样。表现层是一样的，语义化不一样。
+- tr： table row 就是一个表单行, 里面可以包含 th td .
+- 一般 ：thead 的 tr 里面 是 th （tabel head），tbody 的 tr 里面 是 td (tabel data)。
+- td th 的区别 th 是**左右居中**，**粗体**
+- colspan: td th 默认`colspan`是 `1`，表示一个单元格宽度。 设置`colspan="2"` , 表示宽度是 2 个单元格宽度。
+- table 最大宽度就是 tr 中子元素的 `colspan`之和 的最大值
