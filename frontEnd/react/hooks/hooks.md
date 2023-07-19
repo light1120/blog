@@ -23,3 +23,9 @@ useEffect(() => {
   //do something
 }, [ varA , varB ,,,]);
 ```
+
+### useMemo
+
+- [文案](https://reactjs.org/docs/hooks-reference.html#usememo)
+- 使用 `const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);`
+- useMemo 返回一个缓存值，只有依赖的值发生变化，才会重新计算
