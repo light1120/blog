@@ -18,10 +18,10 @@ document.body.appendChild(myImage);
 
 ## 属性
 
-> \* 表示只读
+\* 表示只读
 
 - alt
-- complete \* : 图片都是自上而下一块一块渲染，可以判断拿到图片对象的 `complete` 属性来判断图片是否渲染完成。
+- **complete** \* : 图片都是自上而下一块一块渲染，可以判断拿到图片对象的 `complete` 属性来判断图片是否渲染完成。
 - crossOrigin
 - currentSrc \*
 - src
