@@ -19,13 +19,19 @@ const config = { attributes: true, childList: true, subtree: true };
 
 // 当观察到变动时执行的回调函数
 const callback = function (mutationsList, observer) {
-  // Use traditional 'for loops' for IE 11
   for (let mutation of mutationsList) {
     if (mutation.type === "childList") {
       console.log("A child node has been added or removed.");
+      if (mutation.addedNodes.length > 0) {
+        if (targetNode.offsetHeight > 0 && targetNode.offsetWidth > 0) {
+          console.log("targetNode has rendered completed");
+          // 如果要监控渲染完成时间，在前后加个performance.now ，差值即是渲染完成时间
+        }
+      }
     } else if (mutation.type === "attributes") {
       console.log("The " + mutation.attributeName + " attribute was modified.");
     }
+    observer.disconnect();
   }
 };
 
