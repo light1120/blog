@@ -159,3 +159,15 @@ git diff commit1 commit1 --src/.. //比较某个目录或文件 2 次提交
   - `git commit --amend -m [message]` : 使用这次提交来替代上次提交
 - git init 之后添加全程仓库地址，然后 push 代码
   - `git remote add origin git@git.xxx.com:xxxxx/xxxx.git`
+
+## 合并 某个分支的 某几个 commit `cherry pick`
+
+```
+git cherry-pick <commitHash1> <commitHash2>
+```
+
+如果 cherry pick 之后需要回滚 commit 时 `git revert` 。他会重新回滚代码，到缓冲区，需要再次 commit 下，之前 commit 的代码就回滚了。 `git log` 中之前的 commit 不会消失，会再多一个 commit
+
+```
+git revert <commitHash1>
+```
