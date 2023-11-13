@@ -2,12 +2,21 @@
 
 - `pwd` 查看当前目录
 - `pwdx + 进程号` 查看进程运行地址
-- `lsof -i:9876` 查看 9876 端口号进程
+- `lsof -i:9876` 查看 9876 端口号进程 / **lsof -i**查询端口占用进程跟当前用户有关系，A 用户无法查看 B 用户占用的端口
 - `ps aux | grep xxx` 查看 xxx 进程
 - `kill -9 123456` 杀掉进程号 123456
-- `netstat -tunlp | grep 8000` 查看端口监听信息
+- `netstat -antp | grep 8000` 查看端口监听信息
 - `ps aux | grep "run serve" | grep -v grep | awk '{print $2}' | xargs kill -9` : 将筛选出来的进程全部 kill 掉
 - `lsof -i:3000 | awk 'NR>1{print $2}' | xargs kill -9` : 删除端口占有的进程
+
+### netstat 显示网络状态
+
+- `-a`: 查看所有的socket
+- `-t`: 查看 tcp
+- `-u`: 查看 udp
+- `-l`: 查看 LISTEN 状态
+- `-p`: 显示进程pid, 例如`12345/node`
+
 
 ### 文件,目录相关
 
