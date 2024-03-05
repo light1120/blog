@@ -1,6 +1,4 @@
-# 微服务架构
-
-## Eureka
+# Eureka 微服务架构
 
 #### Eureka 是什么
 
@@ -98,6 +96,4 @@ client.getInstancesByAppId('YOUR_SERVICE_NAME', (error, instances) => {
 
 - 3、向微服务发起请求
 
-## Istio
 
-如果微服务通过 K8s 来调度， 那么 Istio 是一个更适合的微服务解决方案。 它是一种 服务网格的 解决方案，不像 Eureka 有中心服务器。Istio 是位 k8s 设计的，可以与 Kubernetes 的服务、Pod、标签等原生概念无缝集成。
