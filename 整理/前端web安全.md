@@ -51,6 +51,7 @@ MITM （ Man-in-the-middle attack ）中间人攻击，客户端发起的请求�
 - https : 最常见，减少破译成本
 - token : 设立 token 校验用户态
 - cookie : httpOnly 避免 cookie 滥用，盗取
+- 借助框架 : 借助 vue react 来避免 xss 攻击
 - X-Frame-Options: SAMEORIGIN 避免被恶意网站 iframe 加载
 - RSA : 使用非对称加密，客户端使用公钥加密，服务端使用私钥解密
 - 签名 : 对接口 query body ticket AES 加密生成签名 ， 服务端使用同样算法计算出签名，判断是否被串改。
