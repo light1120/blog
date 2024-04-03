@@ -1,0 +1,25 @@
+# 后台知识体系
+
+- 网络编程
+    - http
+    - websocket
+    - restful
+- 持久化
+    - orm
+    - Mysql : 分库分表 
+    - redis : cluster 、 lua 、持久化
+    - mongoDB
+    - 数据一致性
+- 微服务
+    - rpc
+    - 服务发现
+    - 服务治理
+- 消息队列
+    - kafka
+- 分布式系统
+    - 分布式事务
+    - 分布式锁
+- docker & docker Compose & k8s
+- nginx & lua
+- elk
+- 操作系统
