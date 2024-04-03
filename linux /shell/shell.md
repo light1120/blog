@@ -18,3 +18,5 @@ fi
 - `exec` : 执行命令
     - `exec su-exec user1` : 使用 `user1` 用户只需
     - `exec "$@"` : 执行所有的参数
+- `su -c "${build_command}"` : 切换到root用户执行 build_command 的命令
+- `$?` : 上面命令执行的返回结果
