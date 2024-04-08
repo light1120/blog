@@ -6,7 +6,7 @@
 
 > 一个现有对象作为原型创建一个新对象。 
 
-读过一些开源框架、库源码的同学经常会看到 `Object.create(null)` 的代码用来创建一个新对象，那么为什么不直接用 `{}`字面量，而是传入 `null` 来创建一个空对象。 原因是 `{}` 实际是 `Object.create(Object.prototype)` 的结果，带有原型链的。`Object.create(null)` 更纯净，什么都没有。
+读过一些开源框架、库源码的同学经常会看到 `Object.create(null)` 的代码用来创建一个新对象，那么为什么不直接用 `{}`字面量，而是传入 `null` 来创建一个空对象。 原因是 `{}` 实际是 `Object.create(Object.prototype)` 的结果，带有原型链的。`Object.create(null)` 更纯净，什么都没有。可以避免很多方法，或者属性访问，追溯对象的原型链起到性能优化的作用。
 
 ### 2、Object.keys() 、 Object.values()
 
