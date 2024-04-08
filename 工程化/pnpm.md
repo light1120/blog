@@ -43,6 +43,8 @@ packages:
   - 'packages/*'
 ```
 
+安装 workspace 其他的包 `pnpm add pkg2@workspace:^` 。package.json 文件中会多出一行 ` "pkg2": "workspace:^",`
+
 - .npmrc : pnpm 的配置
   - registry : 设置包注册源
   - [其他](https://pnpm.io/npmrc)
