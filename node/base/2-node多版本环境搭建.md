@@ -9,10 +9,20 @@
 
 ### n
 
+[n](https://github.com/tj/n) 是一个 npm 包。 要先安装 npm
+
 - 1、npm install -g n // 这里需要先安装 npm , 可以先使用 yum install nodejs 再 yum remove
 - 2、n install xx.xx.xx //这里安装在/usr/local/bin 不能直接使用命令
 - 3、ln -s /usr/local/bin/node /usr/bin/node 创建软链。npm npx 也需要
 - 4、n 选择版本
+
+### nvm
+
+[nvm](https://github.com/nvm-sh/nvm) 是一个独立的工具
+
+- 1、`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash` 或者 `wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash`
+- 2、`nvm install v20.10.0` : 安装
+- 3、`nvm use v20.10.0` : 使用
 
 ### 直接下载官网 tar 包 https://nodejs.org/download/release/
 
