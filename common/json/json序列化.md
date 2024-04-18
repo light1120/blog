@@ -12,11 +12,11 @@
 
   ```
   const me = {
-    name: 'light',
+    name: 'zhangsan',
     gender: 'male'
   }
   JSON.stringify(me);
-  // '{"name":"light","gender":"male"}'
+  // '{"name":"zhangsan","gender":"male"}'
   ```
 
   - 格式化:
@@ -24,7 +24,7 @@
   ```
   console.log(JSON.stringify(me,null,'\t'))
   //{
-  //  "name": "light",
+  //  "name": "zhangsan",
   //  "gender": "male"
   //}
   ```
@@ -49,8 +49,8 @@
 
 - `JSON.parse` : 反序列化
   ```
-  JSON.parse('{"name":"light","gender":"male"}')
-  // {name: 'light', gender: 'male'}
+  JSON.parse('{"name":"zhangsan","gender":"male"}')
+  // {name: 'zhangsan', gender: 'male'}
   ```
 
 ### 3、应用
@@ -59,7 +59,7 @@
 
   ```
   localStorage.setItem('me',{
-    name: 'light',
+    name: 'zhangsan',
     gender: 'male'
   })
   localStorage.getItem('test')
@@ -159,16 +159,28 @@ stringify: (function () {
 
 ```
 const me = {
-  name: 'light',
+  name: 'zhangsan',
   gender: 'male',
   toJSON: function(){
     return `my name is ${this.name}`
   }
 }
 JSON.stringify(me);
-// '"my name is light"'
+// '"my name is zhangsan"'
 ```
 
 **特殊注意**：
 
-`protobufjs` 将 `pb` 换成 `javascript` 对象时都会定义 `toJSON` 方法。那么我们在接入层，接收 `pb` 协议传输的对象数据后，再**新增其他属性**后，传输到前端，前端是无法收到新增的属性数据。因为在传输到前端时，会序列化调用 `JSON.stringify` 方法，简介调用了对象的 `toJSON` 进而把新增的属性过滤掉了
+node 接入层从服务端拿到数据之后， 如果需要给对象添加属性时，要确认对象的 `toJSON` 方法，如果添加属性之后,再传输到前端时，会序列化调用 `JSON.stringify` 方法，间接调用了对象的 `toJSON` 进而把新增的属性过滤掉了。 这里需要创建一个新对象，再传输到前端。
+
+```
+// 下面是伪代码， rpc 拿到 res 对象，添加属性，返回前端。因为 res 对象有定义 toJSON 方法，前端接受不到 new newProperty 属性
+const res = await ctx.server.service(req)
+res.newProperty = 'new Property'
+
+return {
+  code: 0,
+  data: res,
+  message: 'success'
+}
+```

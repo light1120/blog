@@ -1,25 +1,32 @@
 # 后台知识体系
 
 - 网络编程
-    - http
-    - websocket
-    - restful
+    - httpServer
+        - restful Api
+        - req : 接受参数, query params body formdata
+        - res : 返回结果, string json buffer blob
+        - header: 设置http头
+        - cookie: 设置cookie
+        - sse: server send event
+    - WebSocket Server
+    - Udp Server
 - 持久化
     - orm
-    - Mysql : 分库分表 
-    - redis : cluster 、 lua 、持久化
-    - mongoDB
-    - 数据一致性
+    - Mysql
+    - redis
 - 微服务
     - rpc
-    - 服务发现
-    - 服务治理
+    - 链路追踪
+    - 编排：docker k8s
 - 消息队列
     - kafka
+- 日志
+    - elk
+- 监控
+    - elk
+- 网关
+    - nginx
+- 运维
+    - linux
+    - 进程 管理
 - 分布式系统
-    - 分布式事务
-    - 分布式锁
-- docker & docker Compose & k8s
-- nginx & lua
-- elk
-- 操作系统
