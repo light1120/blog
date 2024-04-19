@@ -84,16 +84,26 @@ serviceUrls 这里也需要一个随机方法，实现一个简单的负载均�
 - 2、 获取服务 ip / port
 
 ```
-client.getInstancesByAppId('YOUR_SERVICE_NAME', (error, instances) => {
-  if (error) {
-    console.error('Error fetching instances:', error);
-  } else {
-    // 这里实现一个 queryRandom 随机方法，实现一个简单的负载均衡 。 实际返回的instances 也不是固定的
-    const randomInstance =  queryRandom(instances);
-  }
-});
+const instances = client.getInstancesByAppId('service'.toUpperCase());
+// getInstancesByAppId 就是 从 client.cache.app 数组中取值
+const instances = client.cache.app['service'.toUpperCase()] 
+// 这里实现一个 queryRandom 随机方法，实现一个简单的负载均衡。
+const instance =  queryRandom(instances);
 ```
 
-- 3、向微服务发起请求
+- 3、发起 rpc 请求
+
+```
+// 下面是 grpc 调用的伪代码
+const rpcClient = new grpcClient(`${instance.ip}:${instance.port}`, credentials, {
+    // options...
+});
+const response = await new Promise((resolve, reject) => {
+    rpcClient[service.name](grpcReq, metadata, (err, res) => {
+        resolve(res);
+    });
+});
+// 返回的 response 是二进制，需要序列化。
+```
 
 
