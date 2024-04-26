@@ -59,11 +59,10 @@
 
 - flushSync: 强制 React 在提供的回调函数内同步刷新任何更新，立即更新
 - findDOMNode: （已废弃，使用ref替代）获取dom节点
-- hydrate: （已废弃，使用`hydrateRoot`替代）， 使用 `react-dom/server` 生成的 HTML 内容作为浏览器 DOM 节点，并在其中显示 React 组件
 - render: (已废弃，使用`createRoot`替代)，将JSX渲染到Dom节点
 - unmountComponentAtNode: (已经废弃，使用 `root.unmount`替代)
 - `createRoot`: 将JSX渲染到Dom节点
   - createRoot(domNode, options?): 创建一个react根节点
   - root.render(reactNode): 将react根节点渲染到HTML DOM节点
   - root.unmount() : 销毁渲染树
-- `hydrateRoot`
+- `hydrateRoot`: 使用 `react-dom/server` 生成的 HTML 内容作为浏览器 DOM 节点，并在其中显示 React 组件
