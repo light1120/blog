@@ -1,4 +1,4 @@
-# Vue 项目中的 typescript 知识点
+# Vue 项目中的 typescript 类型
 
 ## defineProps type
 
@@ -29,4 +29,34 @@ const props = defineProps({
     type: Function as PropType<(payload: MouseEvent) => void>
   }
 })
+```
+
+## defineEmits type
+
+```
+const emit = defineEmits<{
+  change: [id: number]
+  update: [value: string]
+}>()
+
+
+// const emit: ((evt: "change", id: number) => void) & ((evt: "update", value: string) => void)
+// 通过 ts 推导，得出 emit 就是 2个函数类型的 并集
+emit('change',12)
+emit('update','age')
+```
+
+## reactive type
+
+```
+import { reactive } from 'vue'
+
+interface Book {
+  title: string
+  year?: number
+}
+
+const book: Book = reactive({ title: 'Vue 3 指引' })
+
+// 不推荐使用 reactive() 的泛型参数，因为处理了深层次 ref 解包的返回值与泛型参数的类型不同。
 ```
