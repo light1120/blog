@@ -84,5 +84,5 @@
 - x : unpress
 - v : list
 
-* tar -xzvf xxx.tar.gz // 解压
-* tar -czvf xxx xxx.tar.gz // 压缩
+* tar -xzvf xxx.tar.gz       // 解压压缩文件
+* tar -czvf xxx.tar.gz xxx   // 创建压缩文件
