@@ -28,15 +28,25 @@ tcpdump [-aAbdDefhHIJKlLnNOpqStuUvxX#] [ -B size ] [ -c count ]
 ## 输出结果
 
 ```
-#tcpdump -i eth1 tcp port 80
-
-13:00:21.004662 IP xx.xx.xx.xx.50404 > x.xxx.xxx.xxx.http: Flags [S], seq 270888470, win 64240, options [mss 1424,sackOK,TS val 325038864 ecr 0,nop,wscale 7], length 0
+# 当前 ip x.xxx.xxx.xxx , 查询 10101 端口占用程序的 tcp 过程 
+# 执行命令 tcpdump -i eth1 tcp port 10101
+# 下面是 34123 向 10101 请求数据，10101 给 34123 回报文的一部分
+......
+22:02:56.293977 IP x.xxx.xxx.xxx.10101 > x.xxx.x.xxx.34123: Flags [.], seq 57893:59305, ack 2826, win 501, options [nop,nop,TS val 3041110190 ecr 1822315787], length 1412
+22:02:56.293983 IP x.xxx.xxx.xxx.10101 > x.xxx.x.xxx.34123: Flags [.], seq 59305:60717, ack 2826, win 501, options [nop,nop,TS val 3041110190 ecr 1822315787], length 1412
+22:02:56.293990 IP x.xxx.xxx.xxx.10101 > x.xxx.x.xxx.34123: Flags [.], seq 60717:62129, ack 2826, win 501, options [nop,nop,TS val 3041110190 ecr 1822315787], length 1412
+......
+22:02:56.294130 IP x.xxx.x.xxx.34123 > x.xxx.xxx.xxx.10101: Flags [.], ack 57893, win 507, options [nop,nop,TS val 1822315788 ecr 3041110190], length 0
+22:02:56.294130 IP x.xxx.x.xxx.34123 > x.xxx.xxx.xxx.10101: Flags [.], ack 59305, win 529, options [nop,nop,TS val 1822315788 ecr 3041110190], length 0
+22:02:56.294130 IP x.xxx.x.xxx.34123 > x.xxx.xxx.xxx.10101: Flags [.], ack 60717, win 542, options [nop,nop,TS val 1822315788 ecr 3041110190], length 0
+.....
+上面过程 去除了 tcp 建立连接和 断开连接的过程，只保留了 10101 回报，和 34123 接受的部分过程。
+这里可以看到，返回报文，分包的过程，比如 发包： seq 60717:62129 length 1412  收包：ack 60717 。上面和下面都是对应的。
 ```
-
 - 时间
 - 协议
-- client ip
-- 服务端 ip
+- client ip + 端口
+- 服务端 ip + 端口
 - 冒号后： 数据包内容，上面命令只保留了 tcp 协议，所以是 tcp 头的信息
 
 ## 常用过滤规则
