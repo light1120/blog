@@ -22,6 +22,7 @@ Array 提供了很多 Api ，大概可以分为4类： 创建Api，访问Api，�
     ```
     Array.from([1, 2, 3], (x) => x + x) // [2,4,6]
     Array.from('hello') // ['h','e','l','l','0']
+    Array.from({length: 100},(_,j)=>j) // 快速创建一个0-100的数组
     ```
 - `isArray` : 判断一个值是否是数组。 `arr.constructor.name === 'Array'` 判断是否数组不谨慎。
 
