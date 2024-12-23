@@ -171,3 +171,20 @@ git cherry-pick <commitHash1> <commitHash2>
 ```
 git revert <commitHash1>
 ```
+
+## fork 仓库如何跟源仓库保持同步？
+
+```
+// 添加源
+git remote add upOrigin xxx.git
+// 拉取源
+git fetch upOrigin
+// 切换自己工作分支
+git checkout workBranch
+// 合并源分支
+git merge upOrigin/workBranch
+// 提交
+git commit 
+// 推送
+git push
+```
