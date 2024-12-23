@@ -1,4 +1,4 @@
-## Controller
+# Controller
 
 > Controller 作为 nest 应用服务的入口， 起到一个承接服务的作用。主要关注，路由，输入，输出 这3个方面。 nest 提供了很多个装饰器使得我们可以很简单的完成这3个方面
 
