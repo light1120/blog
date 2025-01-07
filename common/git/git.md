@@ -187,4 +187,9 @@ git merge upOrigin/workBranch
 git commit 
 // 推送
 git push
+
+// 查看remote
+git remote show 
+// 从 upOrigin 的某个分支为基线创建分支
+git checkout -b new-feature upOrigin/feature
 ```
