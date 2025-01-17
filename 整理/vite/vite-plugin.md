@@ -131,6 +131,8 @@ const htmlPlugin = () => {
 ```
 - 2、生成 zip 文件
 ```ts
+import zipPack from 'vite-plugin-zip-pack'
+
 zipPack({
   outDir: './dist',
   outFileName: 'xxxxx.zip',
