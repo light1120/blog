@@ -2,3 +2,4 @@
 .pnpm
 **/node_modules/
 test.html
+cache
