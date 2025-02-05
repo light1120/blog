@@ -10,9 +10,9 @@
 
 ### 2、实现一个手机验证码的登录模块
 
-接着[上一个项目](./前端tailwindcss页面实践.md)编码, 修改模块1 
+接着[上一个项目](../前端tailwindcss页面实践.md)编码, 修改模块1 
 
-```
+```ts
 <div class="relative mx-32 mt-32 px-32 py-64 bg-white rounded-12 text-24">
   <h1 class="text-48 mb-24">欢迎登录</h1>
   <select
@@ -74,7 +74,7 @@ const gsmInfo = reactive({
 - 8、以上用 ts 实现，有类型推导功能。
 
 先上代码
-```
+```ts
 // template 代码
 <div class="mb-12 relative">
   <input v-model="formData.phone" maxlength="20" class="w-full h-80 border-b-2 border-black focus:border-red outline-none text-32 placeholder:text-gray-300" placeholder="请输入手机号码" />
@@ -130,7 +130,7 @@ const loginSubmit = handleSubmit(async () => {
 
 `useFormValidation` 代码实现
 
-```
+```ts
 import { reactive, watch } from "vue"
 
 // 内置的正则校验
@@ -288,7 +288,7 @@ export const useFormValidation = <T extends Record<string, any>>(validations: IF
 
 `useCountDown` 实现 : 代码有个问题，不知你能不能看出来。
 
-```
+```ts
 import { onUnmounted, ref } from 'vue'
 
 export function useCountDown() {
@@ -327,7 +327,7 @@ export function useCountDown() {
 3、内置了 手机号，邮箱，ID身份证的校验
 4、校验规则，value 支持函数，动态规则只有在 value 为 `true`时才校验； `value: () => gsmInfo.gsmCode == '+86'`
 5、支持 `validation`类型，自定义规则校验，value 为任意返回 `boolean` 的函数。
-```
+```ts
 validation: {
     value: (value?:string)=>{
         return value ? !value.includes('-') : true
@@ -336,7 +336,7 @@ validation: {
 }
 ```
 6、一行代码防止重复提交
-```
+```ts
 const preventReqMore = (fn, p = null) => (...argv) => p ? p : (p = fn(...argv).finally(() => (p = null)))
 const codeSend = preventReqMore(handleSubmit(async () => {
   startCountDown(60)

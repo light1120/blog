@@ -84,7 +84,7 @@ entryTypes 可以用 `PerformanceObserver.supportedEntryTypes`, 会监控所有�
 
 `PerformanceNavigationTiming`继承`PerformanceResourceTiming`。也是一只 `resource` , 但是比较特殊，只在页面发生变化时监控 document 的数据。一般用来监控页面加载时间，如 dom 完成时间等
 
-<div align="center"><img src='../img/navigatorTiming.svg' width=800 alt=''> </img></div>
+<div align="center"><img src='../images/navigatorTiming.svg' width=800 alt=''> </img></div>
 
 - startTime: Always 0.
 - unloadEventStart: (if there is a previous document) the timestamp immediately before the current document's unload event handler starts.
