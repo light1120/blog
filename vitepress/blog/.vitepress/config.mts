@@ -428,6 +428,10 @@ export default defineConfig({
             "link": "/src/前端工程化/版本管理"
           },
           {
+            "text": "包管理",
+            "link": "/src/前端工程化/包管理"
+          },
+          {
             "text": "项目管理",
             "link": "/src/前端工程化/项目管理"
           }
