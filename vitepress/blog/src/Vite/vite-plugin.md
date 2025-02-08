@@ -193,3 +193,38 @@ const calculateMd5Hash = (filePath: string) => {
   });
 };
 ```
+- 4、monorepo 模式下， merge 根目录 .env.xxx 文件和 子项目 .env.xxx 文件
+```ts
+/**
+ * @description monorepo模式下合并根目录.env.xxx文件和
+ * @param localPath 子项目env文件path
+ * @param rootPath monorepo根目录env文件path
+ * @returns
+ */
+import { loadEnv, Plugin } from 'vite';
+
+export const mergeEnv = (localPath: string, rootPath: string) => {
+  return {
+    name: 'vite-plugin-merge-env',
+    config({ mode }) {
+      const localEnv = loadEnv(mode as string, localPath, '');
+      const rootEnv = loadEnv(mode as string, rootPath, '');
+      const env = { ...rootEnv, ...localEnv };
+      return {
+        define: {
+          ...Object.entries(env).reduce((acc: any, [key, value]) => {
+            if (key.startsWith('VITE_')) {
+              acc[`import.meta.env.${key}`] = JSON.stringify(value);
+            }
+            return acc;
+          }, {}),
+        },
+      };
+    },
+  } as Plugin;
+};
+
+export default defineConfig({
+  plugins: [mergeEnv(process.cwd(), path.resolve(__dirname, '../../'))],
+});
+```
