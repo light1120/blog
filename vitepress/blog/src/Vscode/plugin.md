@@ -38,6 +38,14 @@
 - 可以预览在 markdown 中添加的 mermaid 图，如时序图等，
 - [mermaid](https://mermaid.js.org/): 图表工具
 
+### Svg Preview
+
+用于预览 svg 文件
+
+### Turbo Console Log
+
+选中变量，快速生成 console 代码， mac shortcut : control + option + L
+
 ### Git Graph
 
 git 分支结构图形工具，可以查看分支合并情况，也可以根据实际情况 cheery pick 等
